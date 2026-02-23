@@ -7,7 +7,7 @@
         <style>
             body {
                 background-color:rgb(142, 203, 121);
-                font-family: 'sans-serif';
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
                 font-size: 2rem;
             }
             h1 {
@@ -47,6 +47,10 @@
             .card p::before {
                 padding-left: 6rem;
                 content: "- ";
+            }
+
+            #countDisplay * {
+                display: inline;
             }
 
             .footer {
@@ -122,10 +126,12 @@
                 <input type="time" name="latest-time" ><br>
 
                 <label for="notes">Notes</label>
-                <input type="text" name="notes" placeholder='"I am really craving something sweet.'><br>
+                <input type="text" name="notes" placeholder='"I am craving something sweet.'><br>
 
                 <input type="submit">
             </form>
+
+            <button onclick="window.location.reload()">New Plan</button>
 
             <div class="output">
                 <p id="output"></p>
@@ -136,6 +142,8 @@
             const select = document.getElementById("num_people");
             const display = document.getElementById("countDisplay");
 
+            const sprites = ["stick", "stick1", "stick2"]
+
             select.addEventListener('change', function() {
                 const count = parseInt(this.value) || 0;
 
@@ -143,8 +151,10 @@
 
                 if(count <= 10){
                     for(let i = 0; i < count; i++){
+                        let sp = sprites[Math.floor(Math.random()*sprites.length)];
+
                         const img = document.createElement("img")
-                        img.src = "../static/stick1.png";
+                        img.src = `../static/${sp}.png`;
                         display.appendChild(img);
                     }
                 }
