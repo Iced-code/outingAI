@@ -59,9 +59,13 @@ def main(params=None):
         if params["notes"]:
             prompt += f"Keep in mind the following details: {params["notes"]}."
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash", contents= prompt 
-    )
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash", contents= prompt 
+        )
+    except Exception :
+        response.text = "ERROR"
+    
     print(response.text)
 
     return {"message": response.text}

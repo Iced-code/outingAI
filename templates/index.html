@@ -4,224 +4,15 @@
         <title>
             OutingAI
         </title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-
-            body {
-                margin: 0;
-                background: linear-gradient(135deg, #8ecb79, #5fa5a7);
-                font-family: 'Trebuchet MS', Arial, sans-serif;
-                color: #2c2c2c;
-            }
-
-            h1 {
-                text-align: center;
-                margin-top: 2rem;
-                color: white;
-            }
-
-            .container {
-                display: flex;
-                justify-content: center;
-                padding: 2rem 1rem;
-            }
-
-            .card {
-                background: white;
-                padding: 2rem;
-                border-radius: 1.5rem;
-                width: 100%;
-                max-width: 500px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            }
-
-            form {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            label {
-                font-size: 0.9rem;
-                font-weight: bold;
-            }
-
-            .checkbox-group {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-
-            .checkbox-group label {
-                background: #f0f0f0;
-                padding: 0.4rem 0.7rem;
-                border-radius: 1rem;
-                cursor: pointer;
-                font-size: 0.85rem;
-            }
-
-            .checkbox-group input {
-                margin-right: 0.3rem;
-            }
-
-            select, input[type="date"], input[type="time"], input[type="text"] {
-                padding: 0.6rem;
-                border-radius: 0.6rem;
-                border: 1px solid #ccc;
-                font-size: 1rem;
-                width: 100%;
-            }
-
-            .required {
-                color: red;
-            }
-
-            input[type="submit"], button {
-                padding: 0.7rem;
-                border: none;
-                border-radius: 1rem;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: 0.2s ease;
-            }
-
-            input[type="submit"] {
-                background: #5fa5a7;
-                color: white;
-            }
-
-            input[type="submit"]:hover {
-                background: #4c8f90;
-            }
-
-            button {
-                background: #333;
-                color: white;
-            }
-
-            button:hover {
-                background: #111;
-            }
-
-            #countDisplay {
-                display: flex;
-                align-items: center;
-                gap: 0.3rem;
-                flex-wrap: wrap;
-            }
-
-            #countDisplay img {
-                width: 24px;
-                height: 24px;
-            }
-
-            .output {
-                margin-top: 1rem;
-                padding: 1rem;
-                background: #f7f7f7;
-                border-radius: 1rem;
-                min-height: 40px;
-            }
-
-            @media (max-width: 500px) {
-                .card {
-                    padding: 1.5rem;
-                }
-            }
-
-            .fields-row {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            .fields {
-                display: inline-block;
-                margin: 0.5rem;
-            }
-            .fields label {
-                background: #f0f0f0;
-                padding: 0.4rem 0.7rem;
-                border-radius: 1rem;
-                cursor: pointer;
-                font-size: 0.85rem;
-            }
-
-            .fields input {
-                display: none;
-            }
-            .fields label:has(input:checked) {
-                background-color: #8ecb79;
-            }
-        </style>
-
-        <!-- <style>
-            body {
-                background-color:rgb(142, 203, 121);
-                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                font-size: 2rem;
-            }
-            h1 {
-                padding-left: 1.2rem;
-            }
-            hr {
-                border-color: rgb(95, 165, 167);
-                border-width: 0.2rem;
-                border-radius: 2rem;
-            }
-            a, a:visited {
-                color:white;
-                text-decoration: none;
-            }
-            a:hover {
-                text-decoration: underline;
-                text-underline-offset: 0.7rem;
-                text-size-adjust: 0.5rem;
-                text-decoration-color: rgb(95, 165, 167);
-
-                background-color: rgb(50, 63, 74);
-                border-radius: 2rem;
-            }
-
-            .main {
-                padding: 1rem;
-            }
-            .main .card a {
-                display: block;
-                padding: 0.4rem;
-            }
-
-            .main a::before {
-                content: "> ";
-            }
-
-            .card p::before {
-                padding-left: 6rem;
-                content: "- ";
-            }
-
-            #countDisplay * {
-                display: inline;
-            }
-
-            .footer {
-                position: fixed;
-                bottom: 0;
-            }
-            .footer #time {
-                padding: 1rem;
-                text-align: right;
-            }
-        </style> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body>
-        <h1>OutingAI</h1>
-        <hr>
         <div class="container">
             <div class="card">
+                <h1>OutingAI</h1>
                 <form id="userForm">
-                    <label for="activity_type">Select what you want in this outing:</label>
+                    <label for="activity_type">Select tags for this outing:</label>
 
                     <div class="fields_row">
                         <div class="fields">
@@ -280,28 +71,15 @@
                         <option value=8>8</option>
                         <option value=9>9</option>
                         <option value=10>10</option>
-                        <!-- <option value=11>11</option>
-                        <option value=12>12</option>
-                        <option value=13>13</option>
-                        <option value=14>14</option> -->
-                        <option value=15>15</option>
-                        <!-- <option value=16>16</option>
-                        <option value=17>17</option>
-                        <option value=18>18</option>
-                        <option value=19>19</option> -->
-                        <option value=20>20+</option>
+                        <option value=15>15+</option>
                     </select>
                     <div id="countDisplay"></div>
                     
-
                     <label for="date">Date <span class="required">*</span></label>
                     <input type="date" name="date" required>
 
-                    <label for="earliest-time">Earliest time <span class="required">*</span></label>
+                    <label for="earliest-time">Time <span class="required">*</span></label>
                     <input type="time" name="earliest-time" required>
-                    
-                    <!-- <label for="latest-time">Latest time</label>
-                    <input type="time" name="latest-time" ><br> -->
 
                     <label for="city-state">City, State <span class="required">*</span></label>
                     <input type="text" name="city-state" placeholder='Ashburn, Virginia' required>
@@ -312,17 +90,22 @@
                     <label for="notes">Notes</label>
                     <input type="text" name="notes" placeholder='"I am craving something sweet."'>
 
+
                     <input type="submit" value="Generate Plan"> 
 
                     <button onclick="window.location.reload()" id="reset">New Plan</button>
                 </form>
 
                 <br>
-                
 
                 <div class="output">
                     <p id="output"></p>
                 </div>
+            </div>
+            
+            <div class="credits">
+                <a href="https://github.com/Iced-code/twitchy" target='_blank'>
+                Developed by Ayaan Modak (<span style="text-decoration: underline">Github: Iced-Code</span>)</a>
             </div>
         </div>
 
@@ -330,35 +113,27 @@
             const select = document.getElementById("num_people");
             const display = document.getElementById("countDisplay");
 
-            const sprites = ["stick", "stick1", "stick2"]
+            const sprites = ["stick1", "stick2", "stick3", "stick4", "stick5"]
 
             select.addEventListener('change', function() {
                 const count = parseInt(this.value) || 0;
 
                 display.innerHTML = "";
 
-                if(count <= 10){
-                    for(let i = 0; i < count; i++){
-                        let sp = sprites[Math.floor(Math.random()*sprites.length)];
+                for(let i = 0; i < count; i++){
+                    let sp = sprites[Math.floor(Math.random()*sprites.length)];
 
-                        const img = document.createElement("img")
-                        img.src = `../static/${sp}.png`;
-                        display.appendChild(img);
-                    }
-                }
-                else {
                     const img = document.createElement("img")
-                    img.src = "../static/stick1.png";
+                    img.src = `../static/${sp}.png`;
                     display.appendChild(img);
-
-                    const p = document.createElement("p")
-                    p.innerText = "x" + count;
-                    display.appendChild(p);
                 }
             });
 
             document.getElementById("userForm").addEventListener("submit", async function(e) {
                 e.preventDefault(); // stop page reload
+
+                document.getElementById("output").innerText = "Loading...";
+                document.getElementsByClassName("output")[0].style.display = "block";
 
                 const formData = new FormData(this);
 
