@@ -27,7 +27,6 @@ def handle_submit():
         num_persons = request.form.get('num_people')
         date = request.form.get('date')
         earliest_time = request.form.get('earliest-time')
-        # latest_time = request.form.get('latest-time')
         city_state = request.form.get('city-state')
         zipcode = (f" {request.form.get('zipcode')}") or ""
         notes = (request.form.get('notes') or "").strip()

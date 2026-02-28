@@ -12,8 +12,38 @@
             <div class="card">
                 <h1>OutingAI</h1>
                 <form id="userForm">
-                    <label for="activity_type">Select tags for this outing:</label>
+                    
+                    <label for="num_people">Number of Persons <span class="required">*</span></label>
+                    <select name="num_people" id="num_people" required>
+                        <option selected disabled>-</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                        <option value=15>15+</option>
+                    </select>
+                    <div id="countDisplay"></div>
+                    
+                    <label for="date">Date <span class="required">*</span></label>
+                    <input type="date" name="date" required>
 
+                    <label for="earliest-time">Time <span class="required">*</span></label>
+                    <input type="time" name="earliest-time" required>
+
+                    <label for="city-state">City, State <span class="required">*</span></label>
+                    <input type="text" name="city-state" placeholder='Ashburn, Virginia' required>
+
+                    <label for="zipcode">Zipcode</label>
+                    <input type="text" name="zipcode" placeholder='12345'>
+
+
+                    <label for="activity_type">Select tags for this outing:</label>
                     <div class="fields_row">
                         <div class="fields">
                             <label>
@@ -57,38 +87,9 @@
                             </label>
                         </div>
                     </div>
-                    
-                    <label for="num_people">Number of Persons <span class="required">*</span></label>
-                    <select name="num_people" id="num_people" required>
-                        <option selected>-</option>
-                        <option value=1>1</option>
-                        <option value=2>2</option>
-                        <option value=3>3</option>
-                        <option value=4>4</option>
-                        <option value=5>5</option>
-                        <option value=6>6</option>
-                        <option value=7>7</option>
-                        <option value=8>8</option>
-                        <option value=9>9</option>
-                        <option value=10>10</option>
-                        <option value=15>15+</option>
-                    </select>
-                    <div id="countDisplay"></div>
-                    
-                    <label for="date">Date <span class="required">*</span></label>
-                    <input type="date" name="date" required>
-
-                    <label for="earliest-time">Time <span class="required">*</span></label>
-                    <input type="time" name="earliest-time" required>
-
-                    <label for="city-state">City, State <span class="required">*</span></label>
-                    <input type="text" name="city-state" placeholder='Ashburn, Virginia' required>
-
-                    <label for="zipcode">Zipcode</label>
-                    <input type="text" name="zipcode" placeholder='12345'>
 
                     <label for="notes">Notes</label>
-                    <input type="text" name="notes" placeholder='"I am craving something sweet."'>
+                    <input type="text" name="notes" id="notes_input" placeholder='"I am craving something sweet."'>
 
 
                     <input type="submit" value="Generate Plan"> 
@@ -132,8 +133,19 @@
                 }
             });
 
+            const texts = [
+                "\"I am craving something sweet.\"", 
+                "\"Coffee sounds really good.\"", 
+                "\"Anything that sparks some friendly competition.\"",
+                "\"Something formal (but doesn't break the bank).\""            
+            ]
+            function randomFlavorText(){
+                document.getElementById("notes_input").placeholder = texts[Math.floor(Math.random()*texts.length)];
+            }
+            randomFlavorText();
+
             document.getElementById("userForm").addEventListener("submit", async function(e) {
-                e.preventDefault(); // stop page reload
+                e.preventDefault();
 
                 document.getElementById("output").innerText = "Loading...";
                 document.getElementsByClassName("output")[0].style.display = "block";
