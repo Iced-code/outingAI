@@ -64,7 +64,7 @@ def main(params=None):
             model="gemini-2.5-flash", contents= prompt 
         )
     except Exception :
-        response.text = "ERROR"
+        return {"message": "[ERROR]: Unable to load data. Please try again later."}
     
     print(response.text)
 

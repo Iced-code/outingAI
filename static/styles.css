@@ -4,6 +4,7 @@
 
 body {
     margin: 0;
+    min-height: 100vh;
     background: linear-gradient(135deg, #8ecb79, #5fa5a7);
     font-family: 'Trebuchet MS', Arial, sans-serif;
     color: #2c2c2c;
@@ -112,6 +113,10 @@ button:hover {
     .card {
         padding: 1.5rem;
     }
+    #countDisplay img {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .fields-row {
@@ -140,10 +145,11 @@ button:hover {
 
 
 .credits a {
-  position: fixed;
-  bottom: 10px;
-  right: 20px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #444;
   opacity: 0.7;
+}
+
+.credits {
+    text-align: center;
 }
