@@ -23,23 +23,24 @@ def index():
 @app.route("/submit", methods=['POST', 'GET'])
 def handle_submit():
     if request.method == 'POST':
+        activity_type = (request.form.getlist('activity_type') or [])
         num_persons = request.form.get('num_people')
         date = request.form.get('date')
         earliest_time = request.form.get('earliest-time')
-        latest_time = request.form.get('latest-time')
+        # latest_time = request.form.get('latest-time')
+        city_state = request.form.get('city-state')
+        zipcode = (f" {request.form.get('zipcode')}") or ""
         notes = (request.form.get('notes') or "").strip()
-        activity_type = request.form.getlist('activity_type')
 
 
         print(f"""
-              \ngot num_persons: {num_persons}\ngot date: {date}\ngot earliest time: {earliest_time}
-              \ngot latest time: {latest_time}\ngot notes: {notes}\nactivity types: {activity_type}
+              \nactivity types: {activity_type}\ngot num_persons: {num_persons}\ngot date: {date}\ngot earliest time: {earliest_time}
+              \ngot city, state: {city_state}\ngot zipcode: {zipcode}\ngot notes: {notes}
             """)
         
-        output = main({"num_people": num_persons, "date": date, "earliest_time": earliest_time, "latest_time": latest_time, "notes": notes, "activity_type": activity_type})
+        output = main({"activity_type": activity_type, "num_people": num_persons, "date": date, "earliest_time": earliest_time, "city_state": city_state, "zipcode": zipcode, "notes": notes, })
         
         return jsonify(output)
-        # return redirect(url_for('index', ai_output=jsonify(output)))
 
     return redirect(url_for('index'))
 
@@ -49,7 +50,7 @@ def main(params=None):
     if params:
         prompt = f"""
         Create a single plan for an outing for a party of {params["num_people"]}. This outing will take place on {params["date"]} starting
-        at {params["earliest_time"]}. It should be at a location within 8 miles of Ashburn, Virginia zipcode 20148. Provide exact locations with addresses. 
+        at {params["earliest_time"]}. It should be at a location in {params["city_state"]}{params["zipcode"]}. Provide exact locations with addresses. 
         """
 
         if params["activity_type"]:
