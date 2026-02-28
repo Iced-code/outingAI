@@ -3,4 +3,5 @@ pydantic
 dotenv
 typing
 google
+google-genai
 gunicorn
