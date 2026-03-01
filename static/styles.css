@@ -49,6 +49,12 @@ select, input[type="date"], input[type="time"], input[type="text"] {
     border: 1px solid #ccc;
     font-size: 1rem;
     width: 100%;
+
+}
+
+input[type="date"], input[type="time"] {
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .required {
