@@ -7,10 +7,14 @@ OutingAI is a web app that uses AI to generate customized plans for small outing
 ## Installation
 
 ### Step 1: Clone this repository
+```
 git clone https://github.com/Iced-code/outingAI.git
+```
 
 ### Step 2: Create virtual environment
+```
 python -m venv .venv
+```
 
 ### Step 3: Activate virtual environment
 On Windows:
@@ -29,3 +33,6 @@ Install Dependencies
 ```
 python app.py
 ```
+
+## Credits
+Created by Ayaan Modak
