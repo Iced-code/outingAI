@@ -4,6 +4,10 @@
 # OutingAI
 OutingAI is a web app that uses AI to generate customized plans for small outings. You enter headcount, date, time, and location, select tags (food, casual, sporty, etc.), and add optional notes for personalization. OutingAI then generates a tailored outing plan based on your inputs.
 
+## Usage
+[outingai.onrender.com]
+(https://outingai.onrender.com)
+
 ## Installation
 
 ### Step 1: Clone this repository
