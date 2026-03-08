@@ -1,14 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>
-            OutingAI
-        </title>
+        <title>OutingAI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body>
-        <div class="container">
+        <div class="page-wrap">
+
+        <div class="header">
+            <div class="header-eyebrow">Plan your next adventure</div>
+            <h1>Outing<span class="accent">AI</span></h1>
+            <p class="header-sub">Tell me about your group — I'll handle the rest.</p>
+        </div>
+
+        <div class="divider"><span class="divider-icon">◆</span></div>
+
+        <div class="card">
+            <form id="userForm">
+
+                <!-- WHO'S COMING -->
+                <div class="form-section people-section">
+                    <div class="section-label">Who's coming</div>
+                    <div class="people-row">
+                        <div class="field">
+                            <label for="num_people">Number of Persons <span class="required">*</span></label>
+                            <div class="select-wrap">
+                                <select name="num_people" id="num_people" required>
+                                    <option selected disabled value="">—</option>
+                                    <option value="1">1 person</option>
+                                    <option value="2">2 people</option>
+                                    <option value="3">3 people</option>
+                                    <option value="4">4 people</option>
+                                    <option value="5">5 people</option>
+                                    <option value="6">6 people</option>
+                                    <option value="7">7 people</option>
+                                    <option value="8">8 people</option>
+                                    <option value="9">9 people</option>
+                                    <option value="10">10 people</option>
+                                    <option value="15">15+ people</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="countDisplay"></div>
+                    </div>
+                </div>
+
+                <!-- WHEN & WHERE -->
+                <div class="form-section">
+                    <div class="section-label">When &amp; where</div>
+                    <div class="field-group-3">
+                        <div class="field">
+                            <label for="date">Date <span class="required">*</span></label>
+                            <input type="date" name="date" id="date" required>
+                        </div>
+                        <div class="field">
+                            <label for="earliest-time">Time <span class="required">*</span></label>
+                            <input type="time" name="earliest-time" id="earliest-time" required>
+                        </div>
+                        <div class="field">
+                            <label for="zipcode">Zipcode</label>
+                            <input type="text" name="zipcode" id="zipcode" placeholder="12345">
+                        </div>
+                    </div>
+                    <div class="field" style="margin-top:1rem;">
+                        <label for="city-state">City, State <span class="required">*</span></label>
+                        <input type="text" name="city-state" id="city-state" placeholder="Ashburn, Virginia" required>
+                    </div>
+                </div>
+
+                <!-- VIBE -->
+                <div class="form-section">
+                    <div class="section-label">Vibe</div>
+                    <div class="prefs-grid">
+                        <div class="pref-item">
+                            <input type="checkbox" name="activity_type" value="Food" id="pref-food">
+                            <label for="pref-food"><span class="pref-icon">🍽</span> Food</label>
+                        </div>
+                        <div class="pref-item">
+                            <input type="checkbox" name="activity_type" value="Outdoors" id="pref-outdoors">
+                            <label for="pref-outdoors"><span class="pref-icon">🌿</span> Outdoors</label>
+                        </div>
+                        <div class="pref-item">
+                            <input type="checkbox" name="activity_type" value="Indoors" id="pref-indoors">
+                            <label for="pref-indoors"><span class="pref-icon">🏛</span> Indoors</label>
+                        </div>
+                        <div class="pref-item">
+                            <input type="checkbox" name="activity_type" value="Formal" id="pref-formal">
+                            <label for="pref-formal"><span class="pref-icon">🎩</span> Formal</label>
+                        </div>
+                        <div class="pref-item">
+                            <input type="checkbox" name="activity_type" value="Casual" id="pref-casual">
+                            <label for="pref-casual"><span class="pref-icon">👟</span> Casual</label>
+                        </div>
+                        <div class="pref-item">
+                            <input type="checkbox" name="activity_type" value="Sporty" id="pref-sporty">
+                            <label for="pref-sporty"><span class="pref-icon">⚡</span> Sporty</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOTES -->
+                <div class="form-section">
+                    <div class="section-label">Anything else?</div>
+                    <div class="field">
+                        <label for="notes_input">Notes</label>
+                        <input type="text" name="notes" id="notes_input" placeholder="">
+                    </div>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="btn-row">
+                    <button type="submit" class="btn-generate">Generate My Plan →</button>
+                    <button type="button" class="btn-reset" onclick="window.location.reload()">New Plan</button>
+                </div>
+
+            </form>
+
+            <!-- OUTPUT -->
+            <div class="output-section" id="outputSection">
+                <div class="divider" style="margin: 2rem 0 1.5rem; --divider-color: #d4e8e2;">
+                    <style scoped>.output-section .divider::before, .output-section .divider::after { background: linear-gradient(to right, transparent, #d4e8e2, transparent); opacity: 1; } .output-section .divider-icon { color: var(--teal); }</style>
+                    <span class="divider-icon">◆</span>
+                </div>
+                <div class="output-box">
+                    <p id="output"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/Iced-code/outingAI" target="_blank">Developed by Ayaan Modak · Github: Iced-Code</a>
+            ☀️
+        </div>
+
+    </div>
+
+
+
+        <!-- <div class="container">
             <div class="card">
                 <h1>OutingAI</h1>
                 <form id="userForm">
@@ -29,137 +162,57 @@
                         <option value=15>15+</option>
                     </select>
                     <div id="countDisplay"></div>
-                    
-                    <label for="date">Date <span class="required">*</span></label>
-                    <input type="date" name="date" required>
-
-                    <label for="earliest-time">Time <span class="required">*</span></label>
-                    <input type="time" name="earliest-time" required>
-
-                    <label for="city-state">City, State <span class="required">*</span></label>
-                    <input type="text" name="city-state" placeholder='Ashburn, Virginia' required>
-
-                    <label for="zipcode">Zipcode</label>
-                    <input type="text" name="zipcode" placeholder='12345'>
-
-
-                    <label for="activity_type">Select your preferences:</label>
-                    <div class="fields_row">
-                        <div class="fields">
-                            <label>
-                                <input type="checkbox" name="activity_type" value="Food">
-                                Food
-                            </label>
-                        </div>
-
-                        <div class="fields">
-                            <label>    
-                                <input type="checkbox" name="activity_type" value="Outdoors">
-                                Outdoors
-                            </label>
-                        </div>
-
-                        <div class="fields">
-                            <label>
-                                <input type="checkbox" name="activity_type" value="Indoors">
-                                Indoors
-                            </label>
-                        </div>
-
-                        <div class="fields">
-                            <label>
-                                <input type="checkbox" name="activity_type" value="Formal">
-                                Formal
-                            </label>
-                        </div>
-
-                        <div class="fields">
-                            <label>
-                                <input type="checkbox" name="activity_type" value="Casual">
-                                Casual
-                            </label>
-                        </div>
-
-                        <div class="fields">
-                            <label>
-                                <input type="checkbox" name="activity_type" value="Sporty">
-                                Sporty
-                            </label>
-                        </div>
-                    </div>
-
-                    <label for="notes">Notes</label>
-                    <input type="text" name="notes" id="notes_input" placeholder='"I am craving something sweet."'>
-
-
-                    <input type="submit" value="Generate Plan"> 
-
-                    <button onclick="window.location.reload()" id="reset">New Plan</button>
-                </form>
-
-                <br>
-
-                <div class="output">
-                    <p id="output"></p>
-                </div>
-
-                <div class="credits">
-                    <a href="https://github.com/Iced-code/outingAI" target='_blank'>
-                        Developed by Ayaan Modak (<span style="text-decoration: underline">Github: Iced-Code</span>)
-                    </a>
-                </div>
-            </div>
-            
-            
-        </div>
+                     -->
 
         <script>
+            // Stick figure display
             const select = document.getElementById("num_people");
             const display = document.getElementById("countDisplay");
+            const sprites = ["stick1", "stick2", "stick3", "stick4", "stick5"];
 
-            const sprites = ["stick1", "stick2", "stick3", "stick4", "stick5"]
-
-            select.addEventListener('change', function() {
+            select.addEventListener('change', function () {
                 const count = parseInt(this.value) || 0;
-
                 display.innerHTML = "";
-
-                for(let i = 0; i < count; i++){
-                    let sp = sprites[Math.floor(Math.random()*sprites.length)];
-
-                    const img = document.createElement("img")
+                for (let i = 0; i < count; i++) {
+                    const sp = sprites[Math.floor(Math.random() * sprites.length)];
+                    const img = document.createElement("img");
                     img.src = `../static/${sp}.png`;
+                    img.style.animationDelay = `${i * 0.06}s`;
+                    img.style.animation = 'fadeUp 0.3s ease both';
                     display.appendChild(img);
                 }
             });
 
-            const texts = [
-                "\"I am craving something sweet.\"", 
-                "\"Coffee sounds really good.\"", 
-                "\"Anything that sparks some friendly competition.\"",
-                "\"Something formal (but doesn't break the bank).\""            
-            ]
-            function randomFlavorText(){
-                document.getElementById("notes_input").placeholder = texts[Math.floor(Math.random()*texts.length)];
-            }
-            randomFlavorText();
+            // Rotating placeholder text
+            const notePlaceholders = [
+                '"I am craving something sweet."',
+                '"Coffee sounds really good."',
+                '"Anything that sparks some friendly competition."',
+                '"Something formal (but doesn\'t break the bank)."',
+            ];
+            document.getElementById("notes_input").placeholder =
+                notePlaceholders[Math.floor(Math.random() * notePlaceholders.length)];
 
-            document.getElementById("userForm").addEventListener("submit", async function(e) {
+            // Form submission
+            document.getElementById("userForm").addEventListener("submit", async function (e) {
                 e.preventDefault();
 
-                document.getElementById("output").innerText = "Loading...";
-                document.getElementsByClassName("output")[0].style.display = "block";
+                const outputSection = document.getElementById("outputSection");
+                const outputEl = document.getElementById("output");
+
+                outputSection.classList.add("visible");
+                outputEl.innerHTML = '<span class="loading-dots"><span></span><span></span><span></span></span>';
+                outputSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
                 const formData = new FormData(this);
 
-                const response = await fetch("/submit", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                document.getElementById("output").innerText = data.message;
+                try {
+                    const response = await fetch("/submit", { method: "POST", body: formData });
+                    const data = await response.json();
+                    outputEl.innerText = data.message;
+                } catch (err) {
+                    outputEl.innerText = "Something went wrong. Please try again.";
+                }
             });
         </script>
     </body>
