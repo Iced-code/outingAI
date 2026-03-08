@@ -417,7 +417,7 @@ input:focus, select:focus {
     .field-group, .field-group-3 { grid-template-columns: 1fr; }
     .people-row { grid-template-columns: 1fr; }
     .btn-row { flex-direction: column; }
-    .btn-reset { width: 100%; }
+    .btn-row button { width: 100% }
 }
 
 
